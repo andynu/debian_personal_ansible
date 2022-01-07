@@ -1,0 +1,17 @@
+---
+- name: rbenv (clone)
+  shell: git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+- name: rbenv-build (dir)
+  shell: mkdir ~/.rbenv/plugins
+- name: rbenv-build (clone)
+  shell: git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+- name: compile bash extensions
+  shell: cd ~/.rbenv && src/configure && make -C src
+- name: init zsh path
+  shell: echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.zshlocal
+- name: init rbenv
+  shell: echo 'eval "$(rbenv init -)"' >> ~/.zshlocal
+- name: install ruby 2.7
+  shell: zsh -lc 'rbenv install 2.7.0'
+- name: global ruby 2.7
+  shell: zsh -lc 'rbenv global 2.7.0'

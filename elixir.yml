@@ -1,0 +1,12 @@
+---
+- name: Add erlang deb repo
+  shell: "wget https://packages.erlang-solutions.com/erlang-solutions_2.0_all.deb && sudo dpkg -i erlang-solutions_2.0_all.deb"
+- name: "apt update"
+  apt: update_cache=true
+  become: true
+- name: "install packages elixir / erlang"
+  apt:
+    pkg:
+    - esl-erlang
+    - elixir
+  become: true

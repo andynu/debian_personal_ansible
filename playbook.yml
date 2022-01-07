@@ -1,0 +1,65 @@
+---
+- hosts: localhost
+  tasks:
+    - name: apt basics
+      apt:
+        pkg:
+          - zsh
+          - git
+          - vim
+          - tree
+          - golang
+          - ruby-full
+          - rbenv
+          - bar
+          - csvkit
+          - jq
+          - exa
+          - silversearcher-ag
+          - nextcloud-desktop
+          - nextcloud-desktop-cmd
+          - tmux
+          - gitk
+          - git-cola
+          - build-essential
+          # - mysql-client
+          # - mysql-server
+          - cifs-utils
+          - ldapscripts
+          - imagemagick
+          - memcached
+          - tinyproxy
+          - autojump
+          - gparted
+          - openssh-server
+          - mosh
+          - rdesktop
+          - meld
+          - keychain
+          - rpl
+          - exuberant-ctags
+          - network-manager-gnome
+          - network-manager-openconnect-gnome
+          - nm-tray
+          # - nfs-common 
+          # - nfs-kernel-server
+      become: true
+    - name: starter zshrc
+      shell: echo 'source .zshlocal' >> .zshrc
+    - name: init zsh path
+      shell: echo 'export PATH="$HOME/go/bin:$PATH"' >> ~/.zshlocal
+    - include_tasks: rbenv.yml
+    - include_tasks: pyenv.yml
+    - include_tasks: rust.yml
+    - include_tasks: elixir.yml
+    - include_tasks: nvm.yml
+    - name: massren (get)
+      shell: go get -u github.com/laurent22/massren
+    - name: massren (install)
+      shell: go install github.com/laurent22/massren
+    - name: bat (fetch deb)
+      shell: wget https://github.com/sharkdp/bat/releases/download/v0.12.1/bat_0.12.1_amd64.deb
+    - name: bat (install deb)
+      shell: dpkg -i bat_0.12.1_amd64.deb
+      become: true
+

@@ -1,0 +1,5 @@
+---
+- name: install nvm
+  shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | zsh
+- name: install nodejs 12.16.0 LTS
+  shell: zsh -lc 'source ~/.zshrc ; nvm install 12.16.0'
